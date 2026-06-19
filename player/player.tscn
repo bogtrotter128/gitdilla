@@ -22,7 +22,7 @@ shape = SubResource("CircleShape2D_irysc")
 target_position = Vector2(0, 43)
 
 [node name="wall_detect" type="RayCast2D" parent="."]
-target_position = Vector2(55, -26)
+target_position = Vector2(60, -18)
 
 [node name="speed_increase_timer" type="Timer" parent="."]
 autostart = true

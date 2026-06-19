@@ -1,5 +1,6 @@
 extends Node
 @onready var player: Player = $".."
+@onready var wall_detect: RayCast2D = $"../wall_detect"
 
 var caninput = false
 
@@ -23,10 +24,8 @@ func handle_input(delta):
 	if player.sprite.rotation_degrees >= 360: player.sprite.rotation_degrees = 0
 	if player.sprite.rotation_degrees < 0: player.sprite.rotation_degrees = 360
 	
-	if player.is_on_wall():
+	if wall_detect.is_colliding():
 		player.change_state("bounce")
-
-	player.move_and_slide()
 
 func exit_state():
 	caninput = false

@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://0ryl0tsolxwd"]
+[gd_scene load_steps=6 format=3 uid="uid://0ryl0tsolxwd"]
 
 [ext_resource type="Script" uid="uid://cun5n2ir14yx1" path="res://player/player_phys.gd" id="1_a6m3r"]
 [ext_resource type="Script" uid="uid://d2vwo13ffkrpi" path="res://player/player_parts.gd" id="1_jy7ke"]
 [ext_resource type="Texture2D" uid="uid://dn61iv1c7v20d" path="res://sprites/dilla_ball.png" id="2_jy7ke"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jy7ke"]
+bounce = 0.2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pb10j"]
 radius = 38.052597
@@ -11,6 +14,8 @@ radius = 38.052597
 script = ExtResource("1_jy7ke")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_jy7ke")
+gravity_scale = 1.5
 script = ExtResource("1_a6m3r")
 
 [node name="sprite" type="Sprite2D" parent="RigidBody2D"]

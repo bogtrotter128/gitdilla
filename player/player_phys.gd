@@ -6,14 +6,13 @@ var dir = 1
 var speed = 800
 
 func _input(_event: InputEvent) -> void:
-	var dir = Input.get_axis("left","right")
-	if dir: change_speed(dir)
+	var setdir = Input.get_axis("left","right")
+	if setdir && floor_detect.is_colliding(): change_speed(setdir)
 
-func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	apply_central_force(Vector2(speed*dir,0))
 
 func change_speed(setdir):
 	sprite.flip_h = false if setdir > 0 else true
 	dir = setdir
-	if floor_detect.is_colliding():
-		apply_central_force(Vector2(0,-550))
+	apply_central_impulse(Vector2(100*dir,0))
