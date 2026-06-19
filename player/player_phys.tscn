@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://0ryl0tsolxwd"]
+
+[ext_resource type="Script" uid="uid://cun5n2ir14yx1" path="res://player/player_phys.gd" id="1_a6m3r"]
+[ext_resource type="Script" uid="uid://d2vwo13ffkrpi" path="res://player/player_parts.gd" id="1_jy7ke"]
+[ext_resource type="Texture2D" uid="uid://dn61iv1c7v20d" path="res://sprites/dilla_ball.png" id="2_jy7ke"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pb10j"]
+radius = 38.052597
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_jy7ke")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+script = ExtResource("1_a6m3r")
+
+[node name="sprite" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("2_jy7ke")
+offset = Vector2(0, -9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CircleShape2D_pb10j")
+
+[node name="player_parts" type="Node2D" parent="."]
+
+[node name="floor_detect" type="RayCast2D" parent="player_parts"]
+
+[node name="Camera2D" type="Camera2D" parent="player_parts"]
+position = Vector2(0, -64)
