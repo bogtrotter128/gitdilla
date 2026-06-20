@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 	if wheel.rotation_degrees < 0: wheel.rotation_degrees = 360
 
 func _input(event: InputEvent) -> void:
-	if event.is_action("select") && caninput:
+	if event.is_action("press") && caninput:
 		caninput = false
 		print(wheel.rotation_degrees)
 		set_process(false)
