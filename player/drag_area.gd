@@ -21,7 +21,7 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("press") && interact:
 		touchdown = true
-		pos_start = get_local_mouse_position()
+		#pos_start = get_local_mouse_position()
 		time_scale(0.4)
 
 	if event is InputEventMouseMotion && touchdown:

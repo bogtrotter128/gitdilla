@@ -3,10 +3,12 @@
 [ext_resource type="Script" uid="uid://cun5n2ir14yx1" path="res://player/player_phys.gd" id="1_a6m3r"]
 [ext_resource type="Script" uid="uid://d2vwo13ffkrpi" path="res://player/player_parts.gd" id="1_jy7ke"]
 [ext_resource type="Texture2D" uid="uid://dn61iv1c7v20d" path="res://sprites/dilla_ball.png" id="2_jy7ke"]
+[ext_resource type="PackedScene" uid="uid://bgwkxm462sqll" path="res://scenes/spinner.tscn" id="4_j6pqb"]
 [ext_resource type="PackedScene" uid="uid://cq3anc6378v3l" path="res://player/drag_area.tscn" id="4_pb10j"]
+[ext_resource type="Texture2D" uid="uid://h22mfdq8gysj" path="res://sprites/arrow.png" id="6_agyww"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jy7ke"]
-bounce = 0.5
+bounce = 0.6
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pb10j"]
 radius = 38.052597
@@ -17,6 +19,7 @@ script = ExtResource("1_jy7ke")
 [node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=26203685]
 physics_material_override = SubResource("PhysicsMaterial_jy7ke")
 gravity_scale = 2.0
+angular_damp = 1.5
 script = ExtResource("1_a6m3r")
 
 [node name="sprite" type="Sprite2D" parent="RigidBody2D" unique_id=2139155052]
@@ -25,6 +28,12 @@ offset = Vector2(0, -9)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=299488424]
 shape = SubResource("CircleShape2D_pb10j")
+
+[node name="Spinner" parent="RigidBody2D" unique_id=463678541 instance=ExtResource("4_j6pqb")]
+
+[node name="Wheel" parent="RigidBody2D/Spinner" index="0" unique_id=1433348793]
+position = Vector2(1, 0)
+scale = Vector2(0.5703125, 0.5703125)
 
 [node name="player_parts" type="Node2D" parent="." unique_id=1398936563]
 
@@ -35,4 +44,10 @@ position = Vector2(0, -64)
 
 [node name="drag_area" parent="player_parts" unique_id=514770384 instance=ExtResource("4_pb10j")]
 
+[node name="Arrow" type="Sprite2D" parent="player_parts" unique_id=941024587]
+position = Vector2(-1, -151)
+texture = ExtResource("6_agyww")
+
 [connection signal="vector_created" from="player_parts/drag_area" to="RigidBody2D" method="_on_drag_area_vector_created"]
+
+[editable path="RigidBody2D/Spinner"]

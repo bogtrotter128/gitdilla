@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dbri8wk6l1miw"]
+
+[ext_resource type="Texture2D" uid="uid://bji0rhyt8t0h7" path="res://sprites/ph_tri.png" id="2_8uo3i"]
+
+[node name="phys_object" type="RigidBody2D" unique_id=1140754313]
+gravity_scale = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1054478967]
+texture = ExtResource("2_8uo3i")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1558687967]
+polygon = PackedVector2Array(-1, -42, 132, 42, -134, 42)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1600249067]
