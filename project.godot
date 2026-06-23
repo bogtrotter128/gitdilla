@@ -15,12 +15,22 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="dillospinner"
+run/main_scene="uid://ghwrh8xgdtga"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+run/max_fps=60
 config/icon="res://icon.svg"
+
+[autoload]
+
+Sfxhandler="*uid://c6nodn7k45tx"
 
 [display]
 
 window/stretch/scale=0.7
+
+[global_group]
+
+enemy=""
 
 [input]
 

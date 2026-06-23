@@ -1,19 +1,26 @@
 extends RigidBody2D
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var collider: CollisionPolygon2D = $CollisionPolygon2D
-@export var sprite_texture:Texture2D
+const SHARD_EMITTER = preload("uid://cr1ecv4ltf3u3")
 
-# Called when the node enters the scene tree for the first time.
+enum material_type {GLASS, WOOD,STONE}
+@export var material_strength = material_type.WOOD
+var HEALTH:int = 500
+
 func _ready() -> void:
-	if sprite_texture: sprite.texture = sprite_texture
-	var image = Image.new()
-	image.load(sprite.texture.resource_path)
+	add_to_group("enemy")
+	HEALTH += 500 * material_strength
 
-	var bitmap = BitMap.new()
-	bitmap.create_from_image_alpha(image)
+func damage(vel_dmg:Vector2):
+	if vel_dmg.length() > 500:
+		HEALTH -= int(vel_dmg.length())
+	if HEALTH <= 0:
+		die()
 
-	var polygons = bitmap.opaque_to_polygons(Rect2(Vector2(0,0), bitmap.get_size()))
-
-	for polygon in polygons:
-		collider.polygon = polygon
-		collider.position -= Vector2(bitmap.get_size()/2.0)
+func die():
+	if has_node("CollisionShape2D"):
+		$CollisionShape2D.call_deferred("set_disabled",true)
+	else:
+		$CollisionPolygon2D.call_deferred("set_disabled",true)
+	call_deferred("set_freeze_enabled",true)
+	var shards = SHARD_EMITTER.instantiate()
+	sprite.add_child(shards)

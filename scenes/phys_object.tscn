@@ -1,12 +1,17 @@
 [gd_scene format=3 uid="uid://dbri8wk6l1miw"]
 
+[ext_resource type="Script" uid="uid://cwlk475nja76b" path="res://scenes/phys_object.gd" id="1_aj00k"]
 [ext_resource type="Texture2D" uid="uid://bji0rhyt8t0h7" path="res://sprites/ph_tri.png" id="2_8uo3i"]
 
 [node name="phys_object" type="RigidBody2D" unique_id=1140754313]
+mass = 4.0
 gravity_scale = 2.0
+script = ExtResource("1_aj00k")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1054478967]
+position = Vector2(-136, -42)
 texture = ExtResource("2_8uo3i")
+centered = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1558687967]
 polygon = PackedVector2Array(-1, -42, 132, 42, -134, 42)

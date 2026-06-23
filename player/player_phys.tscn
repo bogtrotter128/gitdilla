@@ -8,17 +8,23 @@
 [ext_resource type="Texture2D" uid="uid://h22mfdq8gysj" path="res://sprites/arrow.png" id="6_agyww"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jy7ke"]
-bounce = 0.6
+bounce = 0.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pb10j"]
 radius = 38.052597
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sp012"]
+radius = 46.0
 
 [node name="Player" type="Node2D" unique_id=1879282693]
 script = ExtResource("1_jy7ke")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=26203685]
+mass = 4.0
 physics_material_override = SubResource("PhysicsMaterial_jy7ke")
-gravity_scale = 2.0
+gravity_scale = 1.5
+contact_monitor = true
+max_contacts_reported = 1
 angular_damp = 1.5
 script = ExtResource("1_a6m3r")
 
@@ -29,25 +35,46 @@ offset = Vector2(0, -9)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=299488424]
 shape = SubResource("CircleShape2D_pb10j")
 
-[node name="Spinner" parent="RigidBody2D" unique_id=463678541 instance=ExtResource("4_j6pqb")]
+[node name="Spinner" parent="RigidBody2D" unique_id=463678541 node_paths=PackedStringArray("arrow") instance=ExtResource("4_j6pqb")]
+arrow = NodePath("../../player_parts/Arrow")
 
 [node name="Wheel" parent="RigidBody2D/Spinner" index="0" unique_id=1433348793]
 position = Vector2(1, 0)
 scale = Vector2(0.5703125, 0.5703125)
+
+[node name="damage_area" type="Area2D" parent="RigidBody2D" unique_id=1876270802]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/damage_area" unique_id=48986989]
+shape = SubResource("CircleShape2D_sp012")
+debug_color = Color(0.84843147, 0.36835507, 0.19606465, 0.41960785)
 
 [node name="player_parts" type="Node2D" parent="." unique_id=1398936563]
 
 [node name="floor_detect" type="RayCast2D" parent="player_parts" unique_id=1803497055]
 
 [node name="Camera2D" type="Camera2D" parent="player_parts" unique_id=376489091]
-position = Vector2(0, -64)
+position = Vector2(0, 1)
 
-[node name="drag_area" parent="player_parts" unique_id=514770384 instance=ExtResource("4_pb10j")]
+[node name="Control" type="CanvasLayer" parent="player_parts" unique_id=669558780]
+
+[node name="drag_area" parent="player_parts/Control" unique_id=514770384 instance=ExtResource("4_pb10j")]
+position = Vector2(823, 461)
 
 [node name="Arrow" type="Sprite2D" parent="player_parts" unique_id=941024587]
 position = Vector2(-1, -151)
 texture = ExtResource("6_agyww")
 
-[connection signal="vector_created" from="player_parts/drag_area" to="RigidBody2D" method="_on_drag_area_vector_created"]
+[node name="speed_up_timer" type="Timer" parent="." unique_id=1859638278]
+autostart = true
+
+[node name="launch_cooldown" type="Timer" parent="." unique_id=581631551]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="RigidBody2D" to="RigidBody2D" method="_on_body_entered"]
+[connection signal="body_entered" from="RigidBody2D/damage_area" to="." method="_on_damage_area_body_entered"]
+[connection signal="vector_created" from="player_parts/Control/drag_area" to="RigidBody2D" method="_on_drag_area_vector_created"]
+[connection signal="timeout" from="speed_up_timer" to="RigidBody2D" method="_on_speed_up_timer_timeout"]
+[connection signal="timeout" from="launch_cooldown" to="RigidBody2D" method="_on_launch_cooldown_timeout"]
 
 [editable path="RigidBody2D/Spinner"]

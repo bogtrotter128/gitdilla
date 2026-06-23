@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://4vqkcx8ncdjq"]
 
+[ext_resource type="Script" uid="uid://cwlk475nja76b" path="res://scenes/phys_object.gd" id="1_ttx3p"]
 [ext_resource type="Texture2D" uid="uid://bnxfk8k1nl7q7" path="res://sprites/ph_rec.png" id="2_ttx3p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sp012"]
@@ -7,9 +8,12 @@ size = Vector2(82, 244)
 
 [node name="phys_object" type="RigidBody2D" unique_id=1140754313]
 gravity_scale = 2.0
+script = ExtResource("1_ttx3p")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1054478967]
+position = Vector2(-40, -121)
 texture = ExtResource("2_ttx3p")
+centered = false
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1600249067]
 

@@ -1,12 +1,11 @@
 [gd_scene format=3 uid="uid://bgwkxm462sqll"]
 
 [ext_resource type="Script" uid="uid://63vr1qtpl8lf" path="res://scenes/spinner.gd" id="1_1cp4b"]
-[ext_resource type="Texture2D" uid="uid://bdcokp5geg5dy" path="res://sprites/wheelx10.png" id="2_78gc6"]
+[ext_resource type="Texture2D" uid="uid://cvwjjnqnyp4w0" path="res://sprites/wheel.png" id="1_kke46"]
 
 [node name="Spinner" type="Node2D" unique_id=463678541]
 script = ExtResource("1_1cp4b")
 
 [node name="Wheel" type="Sprite2D" parent="." unique_id=1433348793]
 modulate = Color(1, 1, 1, 0.3254902)
-position = Vector2(-1, 0)
-texture = ExtResource("2_78gc6")
+texture = ExtResource("1_kke46")

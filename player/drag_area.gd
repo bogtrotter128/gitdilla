@@ -1,4 +1,5 @@
 extends Area2D
+@onready var sfx: AudioStreamPlayer = $AudioStreamPlayer
 
 signal vector_created(vector)
 
@@ -23,11 +24,13 @@ func _input(event: InputEvent) -> void:
 		touchdown = true
 		#pos_start = get_local_mouse_position()
 		time_scale(0.4)
+		Sfxhandler.play(load("res://SFX/charge_small.wav"),self,1)
 
 	if event is InputEventMouseMotion && touchdown:
 		pos_end = get_local_mouse_position()
 		#get_global_mouse_position()
 		vector = -(pos_end - pos_start).limit_length(max_length)
+		if !sfx.playing: sfx.play()
 		queue_redraw()
 
 
